@@ -18,7 +18,13 @@ struct Token {
 
 vector<Token> tokenize(const string& line) {
     vector<Token> tokens;
-    // TODO
+    Token token;
+    for (int x = 1; x < line.length(); x++) {
+        token.value = line.substr(x - 1,x);
+        if (token.value != " ") {
+            tokens.push_back(token);
+        }
+    }
     return tokens;
 }
 
