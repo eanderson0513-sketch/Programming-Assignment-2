@@ -1,1 +1,2 @@
 1. Mar 22: Made a tokenizer function to seperate a given string into tokens
+2. Mar 23: Added functionality to the infixtopostfix method in order to get the tokens in a proper order
