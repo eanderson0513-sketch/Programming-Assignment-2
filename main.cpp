@@ -55,7 +55,18 @@ bool isValidInfix(const vector<Token>& tokens) {
 
 vector<Token> infixToPostfix(const vector<Token>& tokens) {
     vector<Token> output;
-    // TODO
+    vector<Token> operators;
+    for (int x = 0; x < tokens.size(); x++) {
+        if (isOperator(tokens[x].value)) {
+            operators.push_back(tokens[x]);
+        }
+        else {
+            output.push_back(tokens[x]);
+        }
+    }
+    for (int a = 0; a < operators.size(); a++) {
+        output.push_back(operators[a]);
+    }
     return output;
 }
 
