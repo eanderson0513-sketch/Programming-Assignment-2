@@ -23,7 +23,7 @@ vector<Token> tokenize(const string& line) {
         tokens.push(line.substr(x - 1,x));
         if (token.value != " ") {
             token.push(token);
-        }
+        }//
     }
     return token;
 }

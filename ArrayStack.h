@@ -18,7 +18,7 @@ public:
         if (size() > 0) {
             data.erase(0);
         }
-    }
+    }//
 
     T top() const {
         if (size() > 0) {
