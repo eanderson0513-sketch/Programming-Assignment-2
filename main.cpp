@@ -34,6 +34,10 @@ bool isOperator(const string& s) {
     return s == "+" || s == "-" || s == "*" || s == "/";
 }
 
+bool isParenthesis(const string& s){
+    return s == "(" || s == ")";
+}
+
 int precedence(const string& op) {
     // TODO
     return 0;
@@ -47,8 +51,14 @@ bool isValidPostfix(const vector<Token>& tokens) {
 }
 
 bool isValidInfix(const vector<Token>& tokens) {
-    // TODO
-    return false;
+    for(int x = 1; x < tokens.size(); x++){
+        if(!isOperator(tokens[x - 1]) && !isParenthesis(tokens[x - 1])){
+            if(!isOperator(tokens[x]) && !isParenthesis(tokens[x])){
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 // Conversion
