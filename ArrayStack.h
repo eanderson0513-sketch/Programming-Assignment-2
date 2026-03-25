@@ -11,26 +11,34 @@ private:
 
 public:
     void push(const T& value) {
-        // TODO
+        data.insert(0);
     }
 
     void pop() {
-        // TODO
+        if (size() > 0) {
+            data.erase(0);
+        }
     }
 
     T top() const {
-        // TODO
-        return T();
+        if (size() > 0) {
+            T t = data[0];
+            return T();
+        }
+        else {
+            return nullptr;
+        }
     }
 
     bool empty() const {
-        // TODO
+        if (size() > 0) {
+            data.erase(0,size() - 1);
+        }
         return true;
     }
 
     int size() const {
-        // TODO
-        return 0;
+        return data.size();
     }
 };
 

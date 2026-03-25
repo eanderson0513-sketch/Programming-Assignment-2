@@ -10,28 +10,32 @@ using namespace std;
 
 // Token
 
-struct Token {
+struct Token : public ArrayStack<char> {
     string value;   // number, operator, or parenthesis
+    ArrayStack<Token> tokens;
 };
 
 // Tokenizer
 
 vector<Token> tokenize(const string& line) {
-    vector<Token> tokens;
     Token token;
     for (int x = 1; x < line.length(); x++) {
-        token.value = line.substr(x - 1,x);
+        tokens.push(line.substr(x - 1,x));
         if (token.value != " ") {
-            tokens.push_back(token);
+            token.push(token);
         }
     }
-    return tokens;
+    return token;
 }
 
 // Helpers
 
 bool isOperator(const string& s) {
     return s == "+" || s == "-" || s == "*" || s == "/";
+}
+
+bool isParenthesis(const string& s){
+    return s == "(" || s == ")";
 }
 
 int precedence(const string& op) {
@@ -47,8 +51,14 @@ bool isValidPostfix(const vector<Token>& tokens) {
 }
 
 bool isValidInfix(const vector<Token>& tokens) {
-    // TODO
-    return false;
+    for(int x = 1; x < tokens.size(); x++){
+        if(!isOperator(tokens[x - 1].value)){
+            if(!isOperator(tokens[x].value)){
+                return false;
+            }
+        }
+    }
+    return true;
 }
 
 // Conversion
@@ -57,7 +67,7 @@ vector<Token> infixToPostfix(const vector<Token>& tokens) {
     vector<Token> output;
     vector<Token> operators;
     for (int x = 0; x < tokens.size(); x++) {
-        if (isOperator(tokens[x].value)) {
+        if (isOperator(tokens.top())) {
             operators.push_back(tokens[x]);
         }
         else {
