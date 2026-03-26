@@ -11,19 +11,18 @@ private:
 
 public:
     void push(const T& value) {
-        data.insert(0);
+        data.push_back(value);
     }
 
     void pop() {
-        if (size() > 0) {
-            data.erase(0);
+        if (!empty()) {
+            data.pop_back();
         }
     }//
 
     T top() const {
-        if (size() > 0) {
-            T t = data[0];
-            return T();
+        if (!empty()) {
+            return data.back();
         }
         else {
             return nullptr;
@@ -32,7 +31,7 @@ public:
 
     bool empty() const {
         if (size() > 0) {
-            data.erase(0,size() - 1);
+            return false;
         }
         return true;
     }

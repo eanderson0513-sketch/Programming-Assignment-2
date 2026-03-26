@@ -3,4 +3,4 @@ Mar 22: Made a tokenizer function to seperate a given string into tokens
 Mar 23: Added functionality to the infixtopostfix method in order to get the tokens in a proper order
 Mar 24: added functionality to the isValidInfix method to check if the given string is an infix
 Mar 25: Added to the ArrayStack file in order for it to work
-Mar 26: Touched some things up
+Mar 26: Touched up the arraystack file

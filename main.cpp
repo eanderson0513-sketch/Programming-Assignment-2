@@ -12,20 +12,19 @@ using namespace std;
 
 struct Token{
     string value;   // number, operator, or parenthesis
+    ArrayStack<Token> tokens;
 };
 
 // Tokenizer
 
-vector<Token> tokenize(const string& line) {
+void tokenize(const string& line) {
     Token token;
-    vector<Token> tokens;
     for (int x = 1; x < line.length(); x++) {
         token.value = line.substr(x - 1,x);
         if (token.value != " ") {
-            tokens.push_back(token);
+            token.tokens.push(token);
         }
     }
-    return tokens;
 }
 
 // Helpers
@@ -63,21 +62,20 @@ bool isValidInfix(const vector<Token>& tokens) {
 
 // Conversion
 
-vector<Token> infixToPostfix(const vector<Token>& tokens) {
+void infixToPostfix(const vector<Token>& tokens) {
     vector<Token> output;
     vector<Token> operators;
     for (int x = 0; x < tokens.size(); x++) {
-        if (isOperator(tokens.top())) {
-            operators.push_back(tokens[x]);
+        if (isOperator(Token.tokens.top())) {
+            operators.push(tokens[x]);
         }
         else {
-            output.push_back(tokens[x]);
+            output.push(tokens[x]);
         }
     }
     for (int a = 0; a < operators.size(); a++) {
-        output.push_back(operators[a]);
+        output.push(operators.top());
     }
-    return output;
 }
 
 // Evaluation
