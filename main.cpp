@@ -10,22 +10,22 @@ using namespace std;
 
 // Token
 
-struct Token : public ArrayStack<char> {
+struct Token{
     string value;   // number, operator, or parenthesis
-    ArrayStack<Token> tokens;
 };
 
 // Tokenizer
 
 vector<Token> tokenize(const string& line) {
     Token token;
+    vector<Token> tokens;
     for (int x = 1; x < line.length(); x++) {
-        tokens.push(line.substr(x - 1,x));
+        token.value = line.substr(x - 1,x);
         if (token.value != " ") {
-            token.push(token);
-        }//
+            tokens.push_back(token);
+        }
     }
-    return token;
+    return tokens;
 }
 
 // Helpers
