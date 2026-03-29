@@ -22,7 +22,7 @@ public:
 
     T top() const {
         if (!empty()) {
-            return data.back();
+            return data.front();
         }
         else {
             return nullptr;

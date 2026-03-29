@@ -49,10 +49,11 @@ bool isValidPostfix(const vector<Token>& tokens) {
     return false;
 }
 
-bool isValidInfix(const vector<Token>& tokens) {
+bool isValidInfix(const ArrayStack<Token>& tokens) {
     for(int x = 1; x < tokens.size(); x++){
-        if(!isOperator(tokens[x - 1].value)){
-            if(!isOperator(tokens[x].value)){
+        if(!isOperator(tokens.top().value)){
+            tokens.pop();
+            if(!isOperator(tokens.top().value)){
                 return false;
             }
         }
@@ -63,11 +64,12 @@ bool isValidInfix(const vector<Token>& tokens) {
 // Conversion
 
 void infixToPostfix(const vector<Token>& tokens) {
-    vector<Token> output;
-    vector<Token> operators;
+    ArrayStack<Token> output;
+    ArrayStack<Token> operators;
+    Token token;
     for (int x = 0; x < tokens.size(); x++) {
-        if (isOperator(Token.tokens.top())) {
-            operators.push(tokens[x]);
+        if (isOperator(token.tokens.top().value)) {
+            operators.push(token.tokens.top());
         }
         else {
             output.push(tokens[x]);
