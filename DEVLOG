@@ -5,3 +5,4 @@ Mar 24: added functionality to the isValidInfix method to check if the given str
 Mar 25: Added to the ArrayStack file in order for it to work
 Mar 26: Touched up the arraystack file
 Mar 28: Instructions unclear, modified some things
+Mar 30: Threw in base functionality for further functions
