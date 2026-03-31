@@ -12,6 +12,7 @@ using namespace std;
 
 struct Token{
     string value;   // number, operator, or parenthesis
+    vector<Token> tokens;
 };
 
 // Tokenizer
@@ -21,7 +22,7 @@ void tokenize(const string& line) {
     for (int x = 1; x < line.length(); x++) {
         token.value = line.substr(x - 1,x);
         if (token.value != " ") {
-            token.tokens.push(token);
+            token.tokens[x] = token;
         }
     }
 }
@@ -49,26 +50,20 @@ int precedence(const string& op) {
 // Detection
 
 bool isValidPostfix(const vector<Token>& tokens) {
-    for(int x = 1; x < tokens.size(); x++){
-        if(!isOperator(tokens.top().value)){
-            tokens.pop();
-            if(isOperator(tokens.top().value)){
+        if(!isOperator(tokens[0].value)){
+            if(isOperator(tokens[1].value)){
                 return false;
             }
         }
-    }
     return true;
 }
 
 bool isValidInfix(const vector<Token>& tokens) {
-    for(int x = 1; x < tokens.size(); x++){
-        if(!isOperator(tokens.top().value)){
-            tokens.pop();
-            if(!isOperator(tokens.top().value)){
+        if(!isOperator(tokens[0].value)){
+            if(!isOperator(tokens[1].value)){
                 return false;
             }
         }
-    }
     return true;
 }
 
@@ -77,17 +72,21 @@ bool isValidInfix(const vector<Token>& tokens) {
 void infixToPostfix(const vector<Token>& tokens) {
     vector<Token> output;
     vector<Token> operators;
-    Token token;
+    int count = 0;
+    int count2 = 0;
     for (int x = 0; x < tokens.size(); x++) {
-        if (isOperator(token.tokens.top().value)) {
-            operators.push(token.tokens.top());
+        if (isOperator(tokens[x].value)) {
+            operators[count] = tokens[x];
+            count++;
         }
         else {
-            output.push(tokens[x]);
+            output[count2] = tokens[x];
+            count2++;
         }
     }
     for (int a = 0; a < operators.size(); a++) {
-        output.push(operators.top());
+        output[count2] = operators[a];
+        count2++;
     }
 }
 
@@ -99,7 +98,7 @@ double evalPostfix(const vector<Token>& tokens) {
     double value2;
     for (int x = 0; x < tokens.size(); x++) {
         if (!isOperator(tokens[x].value)) {
-           value = tokens[x].value;
+           value = stod(tokens[x].value);
             stack.push(value);
         }
         else {

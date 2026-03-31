@@ -6,3 +6,5 @@ Mar 25: Added to the ArrayStack file in order for it to work
 Mar 26: Touched up the arraystack file
 Mar 28: Instructions unclear, modified some things
 Mar 30: Threw in base functionality for further functions
+Mar 31: Went back to vectors on everything that didn't need to be a stack
+Mar 31: Fixed some hanging bugs carried over from attempting to use stacks instead of vectors

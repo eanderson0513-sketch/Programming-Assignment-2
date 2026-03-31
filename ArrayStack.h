@@ -11,7 +11,7 @@ private:
 
 public:
     void push(const T& value) {
-        data.push_back(value);
+        data[data.size()] = value;
     }
 
     void pop() {
@@ -22,7 +22,7 @@ public:
 
     T top() const {
         if (!empty()) {
-            return data.front();
+            return data[data.size() - 1];
         }
         else {
             return nullptr;
@@ -33,7 +33,10 @@ public:
         if (size() > 0) {
             return false;
         }
-        return true;
+        else {
+            return true;
+        }
+        //return true;
     }
 
     int size() const {
